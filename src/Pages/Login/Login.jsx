@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import login from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -12,6 +12,10 @@ const Login = () => {
   const [error,setError] = useState([])
 
   const {LogIn} = useContext(AuthContext)
+
+  const location = useLocation()
+  const navigate = useNavigate()
+  const from = location.state?.from?.pathname || '/'
 
     const handleLogin = event =>{
       event.preventDefault()
@@ -33,6 +37,7 @@ const Login = () => {
         })
         form.reset()
         console.log(loggedUser);
+        navigate(from, {replace: true})
       })
       .catch(error =>{
         setError(error.message)

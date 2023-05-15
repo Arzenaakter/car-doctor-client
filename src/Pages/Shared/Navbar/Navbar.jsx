@@ -34,8 +34,15 @@ const Navbar = () => {
         <Link to='/'>Blog</Link>
     </li>
     <li>
-        <Link to='/'>Contact</Link>
+    {user ?.email? 
+    <>
+    <Link to='/bookings'>My Booking</Link>
+    <button className="" onClick={handleLogOut} >LogOut</button>
+    </> 
+       
+    : <Link className="" to='/login'>Login</Link> }
     </li>
+
     </>
 
   return (
@@ -74,12 +81,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <button className="btn btn-outline btn-error">Appointment</button>
-        <div className="ml-4">
-        {user ? 
-       
-           <button className="btn" onClick={handleLogOut} >LogOut</button>
-        : <Link className="btn" to='/login'>Login</Link> }
-        </div>
+        
       </div>
     </div>
   );
