@@ -1,26 +1,44 @@
 import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import BookingRow from "./BookingRow";
 
+
 const Bookings = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const [bookings, setBookings] = useState([]);
+   
 
+
+  const url = `https://car-doctor-server-kappa-navy.vercel.app/booking?email=${user?.email}`
   useEffect(() => {
-    fetch(`http://localhost:5000/booking?email=${user?.email}`)
+    fetch(url,{
+      method:'GET',
+      headers:{
+        authorization: ` Bearer ${localStorage.getItem('car-access-token')}`
+      }
+    })
       .then((res) => res.json())
-      .then((data) => setBookings(data))
-  }, []);
+      .then((data) => {
+        if(!data.error){
+          setBookings(data)
+        }
+        else{
+          navigate('/')
+        }
+        })
+  }, [url,navigate]);
 
 
 
   const handleDelete =(id)=>{
     const proceed = confirm('Are you sure you want to proceed');
     if(proceed){
-        fetch(`http://localhost:5000/booking/${id}`, {
+        fetch(`https://car-doctor-server-kappa-navy.vercel.app/booking/${id}`, {
             method:'DELETE'
             
         })
@@ -37,7 +55,7 @@ const Bookings = () => {
 }
 
 const handleBookingConfirm =( id) =>{
-    fetch(`http://localhost:5000/booking/${id}`, {
+    fetch(`https://car-doctor-server-kappa-navy.vercel.app/booking/${id}`, {
         method:'PATCH',
         headers:{
             'content-type': 'application/json'

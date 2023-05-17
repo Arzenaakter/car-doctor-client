@@ -13,6 +13,7 @@ const Navbar = () => {
     LogOut()
     .then(() =>{
       Swal.fire('LogOut')
+      // localStorage.removeItem('car-access-token')
     })
     .catch(error =>{
       console.log(error);

@@ -30,7 +30,7 @@ const CheckOut = () => {
  console.log(order);
 
     // useEffect(() => {  
-        fetch('http://localhost:5000/booking',{
+        fetch('https://car-doctor-server-kappa-navy.vercel.app/booking',{
             method:'POST',
             headers:{
                 'content-type' : 'application/json'

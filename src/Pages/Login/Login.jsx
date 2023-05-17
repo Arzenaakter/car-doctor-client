@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import login from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../Providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 
 const Login = () => {
@@ -23,11 +24,11 @@ const Login = () => {
       const form = event.target;
       const email= form.email.value;
       const password = form.password.value;
-      console.log("login",email,password);
+      // console.log("login",email,password);
 
       LogIn(email,password)
       .then(result =>{
-        const loggedUser = result.user;
+        const user = result.user;
         Swal.fire({
           position: 'top-center',
           icon: 'success',
@@ -36,8 +37,14 @@ const Login = () => {
           timer: 1500
         })
         form.reset()
-        console.log(loggedUser);
         navigate(from, {replace: true})
+        
+      
+      
+        console.log(user);
+
+     
+
       })
       .catch(error =>{
         setError(error.message)
@@ -89,6 +96,7 @@ const Login = () => {
               </div>
             </form>
             <p className="mt-4 text-center">New to Car Doctor ? <Link className="text-red-500 font-bold" to='/signup'>Sign Up</Link></p>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

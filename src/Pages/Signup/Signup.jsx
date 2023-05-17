@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 import login from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../Providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 
 const Signup = () => {
@@ -104,6 +105,7 @@ const Signup = () => {
               </div>
             </form>
             <p className="mt-4 text-center">Already have an account  ? <Link className="text-red-500 font-bold" to='/login'>Login</Link></p>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
